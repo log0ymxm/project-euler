@@ -1,4 +1,4 @@
-(ns clj-solns.problem-one)
+(ns clj-solns.problem-001)
 
 (defn multiple? [n]
   (or (zero? (mod n 3))

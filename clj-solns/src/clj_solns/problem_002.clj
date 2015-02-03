@@ -1,4 +1,4 @@
-(ns clj-solns.problem-two)
+(ns clj-solns.problem-002)
 
 (defn fibs []
   (map first (iterate (fn [[a b]] [b (+ a b)]) [0 1])))
