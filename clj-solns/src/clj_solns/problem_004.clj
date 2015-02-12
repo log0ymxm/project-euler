@@ -1,14 +1,6 @@
-(ns clj-solns.problem-004)
-
-(defn palindrome-number? [num]
-  (let [s (str num)
-        n (count s)
-        sides (split-at (/ n 2) s)]
-    (and (even? n)
-         (= (-> sides first reverse)
-            (-> sides last)))))
-
-(def three-digit-nums (reverse (range 100 1000)))
+(ns clj-solns.problem-004
+  (:require [clj-solns.utils :refer [palindrome-number?]]
+            [clj-solns.sequences :refer [three-digit-nums]]))
 
 (defn palindrome-products [lst]
   (for [x three-digit-nums

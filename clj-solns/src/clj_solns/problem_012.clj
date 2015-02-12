@@ -1,18 +1,6 @@
-(ns clj-solns.problem-012)
-
-(defn triangle-number [n]
-  (apply + (range n)))
-
-(def triangle-numbers
-  (->> (range)
-       (map inc)
-       (map triangle-number)))
-
-(defn factors [n]
-  (into (sorted-set)
-    (mapcat (fn [x] [x (/ n x)])
-            (filter #(zero? (rem n %))
-                    (range 1 (inc (Math/sqrt n)))))))
+(ns clj-solns.problem-012
+  (:require [clj-solns.sequences :refer [triangle-numbers]]
+            [clj-solns.utils :refer [factors]]))
 
 (defn problem-twelve []
   (-> (for [n triangle-numbers

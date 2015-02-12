@@ -1,11 +1,5 @@
-(ns clj-solns.problem-005)
-
-(defn remainders [n rng]
-  (map #(mod n %) rng))
-
-(defn divisible-by-range? [n rng]
-  (->> (remainders n rng)
-       (every? zero?)))
+(ns clj-solns.problem-005
+  (:require [clj-solns.utils :refer [remainders divisible-by-range?]]))
 
 ;; brute force, not the fastest. Better to
 ;; find all prime factors of [1,20] and multiply

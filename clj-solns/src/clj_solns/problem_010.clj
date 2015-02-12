@@ -1,13 +1,5 @@
-(ns clj-solns.problem-010)
-
-(def certainty 6)
-
-(defn prime? [n]
-  (.isProbablePrime (BigInteger/valueOf n)
-                    certainty))
-
-(def all-ints (range 1 Integer/MAX_VALUE))
-(def primes (filter prime? all-ints))
+(ns clj-solns.problem-010
+  (:require [clj-solns.sequences :refer [primes]]))
 
 (defn problem-ten []
   (->> primes
