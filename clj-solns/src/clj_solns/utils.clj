@@ -26,16 +26,27 @@
       (fd/distinct [a b c])
       (== q [a b c]))))
 
+(defn triangle-number [n]
+  (apply + (range n)))
+
 (def triangle-numbers
   (->> (range)
        (map inc)
        (map triangle-number)))
+
+(def collatz-num
+  (memoize
+   (fn [n]
+     (if (even? n)
+       (/ n 2)
+       (inc (* 3 n))))))
 
 (defn collatz-seq [n]
   (concat
    (take-while #(not= % 1)
                (iterate collatz-num n))
    [1]))
+
 (defn prime-factors
   "Return a list of factors of N."
   ([n]
@@ -68,21 +79,14 @@
           (Math/pow b 2))
        (Math/pow c 2))))
 
-(defn triangle-number [n]
-  (apply + (range n)))
-
 (defn factors [n]
   (into (sorted-set)
     (mapcat (fn [x] [x (/ n x)])
             (filter #(zero? (rem n %))
                     (range 1 (inc (Math/sqrt n)))))))
 
-(def collatz-num
-  (memoize
-   (fn [n]
-     (if (even? n)
-       (/ n 2)
-       (inc (* 3 n))))))
+(defn perfect-factors [n]
+  (-> n factors (disj n)))
 
 (defn max-index [seq]
   (->> seq
@@ -126,3 +130,15 @@
               (take-while #(<= % n) primes))
          acc 1]
     (if h (recur t (*' h acc)) acc)))
+
+(defn perfect? [n]
+  (= (apply + (perfect-factors n))
+     n))
+
+(defn deficient? [n]
+  (< (apply + (perfect-factors n))
+     n))
+
+(defn abundant? [n]
+  (> (apply + (perfect-factors n))
+     n))
