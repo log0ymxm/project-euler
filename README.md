@@ -19,7 +19,12 @@ Playing around & solving Project Euler problems
 - [X] Problem 15: Clojure
 - [X] Problem 16: Clojure
 - [X] Problem 17: Clojure
-- [ ] Problem 18: Clojure
+- [X] Problem 18: Clojure
+- [X] Problem 19: Clojure
+- [X] Problem 20: Clojure
+- [X] Problem 21: Clojure
+- [X] Problem 22: Clojure
+- [ ] Problem 23: Clojure
 
 ## Note
 
