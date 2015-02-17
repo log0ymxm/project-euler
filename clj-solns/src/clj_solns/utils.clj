@@ -1,5 +1,41 @@
-(ns clj-solns.utils)
+(ns clj-solns.utils
+  (:use clojure.core.logic)
+  (:require [clojure.core.logic.fd :as fd]))
 
+(defn fibs []
+  (map first (iterate (fn [[a b]] [b (+ a b)]) [0 1])))
+
+(def three-digit-nums (reverse (range 100 1000)))
+
+(def certainty 6)
+
+(defn prime? [n]
+  (.isProbablePrime (BigInteger/valueOf n)
+                    certainty))
+
+(def all-ints (range 1 Integer/MAX_VALUE))
+(def primes (filter prime? all-ints))
+
+;; core.logic makes this feel like cheating
+;; but really, it's a perfect use.
+(def thousand-sums
+  (run* [q]
+    (fresh [a b c]
+      (fd/in a b c (fd/interval 1 1000))
+      (fd/eq (= (+ a b c) 1000))
+      (fd/distinct [a b c])
+      (== q [a b c]))))
+
+(def triangle-numbers
+  (->> (range)
+       (map inc)
+       (map triangle-number)))
+
+(defn collatz-seq [n]
+  (concat
+   (take-while #(not= % 1)
+               (iterate collatz-num n))
+   [1]))
 (defn prime-factors
   "Return a list of factors of N."
   ([n]
@@ -25,12 +61,6 @@
 (defn divisible-by-range? [n rng]
   (->> (remainders n rng)
        (every? zero?)))
-
-(def certainty 6)
-
-(defn prime? [n]
-  (.isProbablePrime (BigInteger/valueOf n)
-                    certainty))
 
 (defn pythagorean-triplet? [triplet]
   (let [[a b c] triplet]
@@ -74,3 +104,25 @@
 
 (defn remove-space [s]
   (-> s (clojure.string/replace " " "")))
+
+(defn digits [number]
+  (map #(Character/getNumericValue %) (str number)))
+
+(defn power [x n]
+  (cond (= 0 n) 1
+        (= 1 n) x
+        (even? n) (power (*' x x) (/ n 2))
+        (odd? n) (*' x (power (*' x x) (/ (dec n) 2)))))
+
+(defn- find-power [n k]
+  (loop [total n sum 0]
+    (let [i (int (/ total k))]
+      (if (zero? i) sum
+          (recur i (+ sum i))))))
+
+(defn ! [n]
+  (loop [[h & t]
+         (map #(power % (find-power n %))
+              (take-while #(<= % n) primes))
+         acc 1]
+    (if h (recur t (*' h acc)) acc)))

@@ -1,6 +1,5 @@
 (ns clj-solns.problem-004
-  (:require [clj-solns.utils :refer [palindrome-number?]]
-            [clj-solns.sequences :refer [three-digit-nums]]))
+  (:require [clj-solns.utils :refer [palindrome-number? three-digit-nums]]))
 
 (defn palindrome-products [lst]
   (for [x three-digit-nums

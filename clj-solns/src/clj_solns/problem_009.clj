@@ -1,6 +1,5 @@
 (ns clj-solns.problem-009
-  (:require [clj-solns.sequences :refer [thousand-sums]]
-            [clj-solns.utils :refer [pythagorean-triplet?]]))
+  (:require [clj-solns.utils :refer [pythagorean-triplet? thousand-sums]]))
 
 (defn problem-nine []
   (->> thousand-sums

@@ -1,5 +1,5 @@
 (ns clj-solns.problem-010
-  (:require [clj-solns.sequences :refer [primes]]))
+  (:require [clj-solns.utils :refer [primes]]))
 
 (defn problem-ten []
   (->> primes
