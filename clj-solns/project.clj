@@ -8,4 +8,5 @@
                  [org.clojure/core.logic "0.8.8"]
                  [net.mikera/core.matrix "0.32.1"]
                  [org.clojure/core.match "0.3.0-alpha4"]
-                 [aysylu/loom "0.5.0"]])
+                 [aysylu/loom "0.5.0"]
+                 [clj-time "0.9.0"]])
